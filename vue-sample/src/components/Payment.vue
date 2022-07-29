@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from '@vue/reactivity';
 import { reactive } from 'vue';
 
 const item1 = reactive({
@@ -23,6 +24,16 @@ const clear = () => {
 }
 
 const message: string = ''
+
+const budget: number = 50000
+
+const priceLabel = computed(() => {
+    if (item1.price > budget) {
+        return 'too expensive...'
+    }
+    return item1.price + ' yen'
+})
+
 </script>
 
 <template>
@@ -33,13 +44,13 @@ const message: string = ''
         <button v-on:click="clear">Clear</button>
         <div class="payment">
             <label>{{ item1.name }}</label>
-            <label>{{ item1.price }} 円</label>
+            <label>{{ priceLabel }}</label>
             <a v-bind:href="url1">bought at ...</a>
             <button v-on:click="buy(item1.name)">BUY</button>
         </div>
         <div class="payment">
             <label>{{ item2.name }}</label>
-            <label>{{ item2.price }} 円</label>
+            <label>{{ item2.price + ' yen' }}</label>
             <button v-on:click="buy(item1.name)">BUY</button>
         </div>
     </div>
