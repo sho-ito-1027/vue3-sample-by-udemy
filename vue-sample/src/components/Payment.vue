@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
-import { reactive } from 'vue';
+import { ref, toRefs } from '@vue/reactivity';
+import { reactive, watch } from 'vue';
 
 const item1 = reactive({
     name: 'Desk',
@@ -27,11 +27,18 @@ const message: string = ''
 
 const budget: number = 50000
 
-const priceLabel = computed(() => {
-    if (item1.price > budget) {
-        return 'too expensive...'
+const priceLabel = ref<string>(item1.price + ' yen')
+const { price } = toRefs(item1)
+watch(price, () => {
+    if (price.value > budget * 2) {
+        priceLabel.value = 'tooooooo expensive..'
+        return
     }
-    return item1.price + ' yen'
+    if (price.value > budget) {
+        priceLabel.value = 'expensive..'
+        return
+    }
+    priceLabel.value = price.value + ' yen'
 })
 
 </script>
