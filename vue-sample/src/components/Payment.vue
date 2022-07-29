@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, toRefs } from '@vue/reactivity';
-import { reactive, watch } from 'vue';
+import { onBeforeMount, onMounted, onUpdated, reactive, watch } from 'vue';
 
 const item1 = reactive({
     name: 'Desk',
@@ -39,6 +39,18 @@ watch(price, () => {
         return
     }
     priceLabel.value = price.value + ' yen'
+})
+
+onBeforeMount(() => {
+    console.log('on before mounted')
+})
+
+onMounted(() => {
+    console.log('on mounted')
+})
+
+onUpdated(() => {
+    console.log('on updated')
 })
 
 </script>
