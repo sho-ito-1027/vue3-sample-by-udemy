@@ -1,38 +1,16 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import CardList from './components/CardList.vue';
-import SecondCardList from './components/SecondCardList.vue';
+import { provide } from 'vue';
+import TodoList from './components/TodoList.vue';
+import { todoKey, todos } from './useTodo';
 
-const isFirstTab = ref(true)
-const updateTab = (isFirst: boolean) => {
-  isFirstTab.value = isFirst
-}
+// provide('todos', todos)
+provide(todoKey, todos)
 
-const currentComponent = computed(() => {
-  switch (isFirstTab.value) {
-    case true:
-      return CardList
-    case false:
-      return SecondCardList
-  }
-
-})
-
+// provide('addTodo', addTodo)
 </script>
 
 <template>
-  <div class="tab-changer">
-    <button @click="updateTab(true)">Tab 1</button>
-    <button @click="updateTab(false)">Tab 2</button>
-  </div>
-  <div class="tab-contents">
-    <!-- <CardList></CardList> -->
-    <component :is="currentComponent">
-
-    </component>
-    <!--<CardList v-if="isFirstTab"></CardList>
-    <SecondCardList v-if="!isFirstTab"></SecondCardList> -->
-  </div>
+  <TodoList></TodoList>
 </template>
 
 <style>
