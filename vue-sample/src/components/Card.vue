@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 defineProps<{
   title: string,
 }>();
@@ -7,12 +7,14 @@ defineProps<{
 
 <template>
   <div class="card-container">
-    <div class="contents">
+    <div class="content">
       <span class="title">{{ title }}</span>
       <slot></slot>
     </div>
     <div class="footer">
-      <slot name="footer">Default Footer</slot>
+      <slot name="footer">
+        <span>Default Footer</span>
+      </slot>
     </div>
   </div>
 </template>
@@ -29,10 +31,8 @@ defineProps<{
   align-items: center;
 }
 
-.contents {
+.content {
   padding: 0px 20px 0px 20px;
-  display: flex;
-  flex-direction: column;
 }
 
 .title {
@@ -49,4 +49,5 @@ defineProps<{
   justify-content: center;
   align-items: center;
 }
+
 </style>

@@ -1,15 +1,3 @@
-<script lang="ts">
-export default {
-  name: "RocketIcon",
-};
-</script>
-
-<script lang="ts" setup>
-withDefaults(defineProps<{
-  size: string,
-}>(), { size: '52px' });
-</script>
-
 <template>
   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
     y="0px" :width="size" :height="size" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
@@ -38,3 +26,16 @@ withDefaults(defineProps<{
   </svg>
 </template>
 
+<script lang="ts">
+export default {
+  name: "RocketIcon",
+};
+</script>
+
+<script lang="ts" setup>
+// defineProps<{ size: string }>()
+
+withDefaults(defineProps<{
+  size: string,
+}>(), { size: '52px' });
+</script>/

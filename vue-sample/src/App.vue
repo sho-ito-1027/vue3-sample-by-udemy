@@ -1,23 +1,50 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import { computed, ref } from 'vue';
 import CardList from './components/CardList.vue';
+import SecondCardList from './components/SecondCardList.vue';
+
+const isFirstTab = ref(true)
+const updateTab = (isFirst: boolean) => {
+  isFirstTab.value = isFirst
+}
+
+const currentComponent = computed(() => {
+  switch (isFirstTab.value) {
+    case true:
+      return CardList
+    case false:
+      return SecondCardList
+  }
+
+})
+
 </script>
 
 <template>
-  <CardList />
+  <div class="tab-changer">
+    <button @click="updateTab(true)">Tab 1</button>
+    <button @click="updateTab(false)">Tab 2</button>
+  </div>
+  <div class="tab-contents">
+    <!-- <CardList></CardList> -->
+    <component :is="currentComponent">
+
+    </component>
+    <!--<CardList v-if="isFirstTab"></CardList>
+    <SecondCardList v-if="!isFirstTab"></SecondCardList> -->
+  </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  .tab-contents {
+    margin-top: 20px;
+  }
 </style>
